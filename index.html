@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduardo Schrotke - Portfolio</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="l-header" id="header">
+        <nav class="nav bd-grid">
+            <div>
+                <!-- Removido o logo "Eduardo Schrotke" -->
+            </div>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="#about" class="nav__link">Sobre</a></li>
+                    <li class="nav__item"><a href="#skills" class="nav__link">Habilidades</a></li>
+                    <li class="nav__item"><a href="#portfolio" class="nav__link">Projetos</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contato</a></li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home -->
+    <main class="l-main">
+        <section class="home" id="home">
+            <div class="home__container bd-grid">
+                <div class="home__data">
+                    <h1 class="home__title" id="home-title">BEM VINDO, SOU</h1>
+                    <h2 class="home__subtitle" id="home-subtitle">Desenvolvedor IA | Estudante de Eng. de Soft.</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about section" id="about" aria-label="Sobre mim">
+            <h2 class="section-title" id="about-title">Sobre mim</h2>
+            <div class="about__container bd-grid">
+                <div class="about__content">
+                    <div class="about__img">
+                        <img src="assets/img/avatar.jpg" alt="Foto de perfil de Eduardo Schrotke" class="circle-image" loading="lazy">
+                    </div>
+                    <div class="about__info">
+                        <h2 class="about__subtitle" id="about-subtitle">Eu sou o Eduardo Schrotke</h2>
+                        <span class="about__profession" id="about-profession">Desenvolvedor IA | Estudante de Engenharia de Software</span>
+                        <p class="about__text" id="about-text">Atualmente trabalho como desenvolvedor de IA Trainee pela CompassUOL.</p>
+                        <p id="about-text-2">Estou no penúltimo ano de Engenharia de Software, com conclusão prevista para julho de 2026.</p>
+                        <a href="assets/pdf/curriculo.pdf" download class="about__cv-button">
+                            <button id="download-cv-button" class="cv-button"><i class='bx bx-download'></i> <span id="cv-text">Baixar CV</span></button>
+                        </a>
+                        <div class="about__socials">
+                            <a href="https://www.linkedin.com/in/eduardo-souza-a23698251/" target="_blank" class="footer__social" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                            <a href="https://github.com/drdssouza" target="_blank" class="footer__social" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+                            <a href="https://www.instagram.com/duduschrotke/" target="_blank" class="footer__social" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills section" id="skills" aria-label="Skills">
+            <h2 class="section-title" id="skills-title">Habilidades</h2>
+            <div class="skills__container bd-grid">
+                <div class="skills__box">
+                    <h3 class="skills__subtitle" id="skills-subtitle">Áreas de conhecimento</h3>
+                    <ul class="skills__list">
+                        <li class="skills__name">Python</li>
+                        <li class="skills__name">Machine Learning</li>
+                        <li class="skills__name">AWS</li>
+                        <li class="skills__name">Git</li>
+                        <li class="skills__name">Html</li>
+                        <li class="skills__name">Css</li>
+                        <li class="skills__name">Javascript</li>
+                        <li class="skills__name">Metodologia Ágil</li>
+                        <li class="skills__name">BigData</li>
+                        <li class="skills__name">Inteligência Artificial</li>
+                        <li class="skills__name">SQL</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" aria-label="Professional Experience">
+            <h2 class="section-title" id="portfolio-title">Experiências Profissionais</h2>
+            <div class="projeto">
+                <img src="assets/img/projeto 1.png" alt="Projeto 1">
+                <div class="projeto-info">
+                    <h3 id="project-1-title">Identificação de Agressão Verbal</h3>
+                    <p id="project-1-description">Receber vídeos via front-end que seriam jogados para um bucket dentro do AWS S3, e utilizando o Amazon Transcribe, faz a transcrição do vídeo e é acionado uma LLM (no caso foi utilizado o modelo Claude Sonnet 3.5) onde fazia a análise e retornava no front-end e por e-mail quando se obtivesse uma resposta.</p>
+                    <ul class="tecnologias">
+                        <li>Python</li>
+                        <li>AWS</li>
+                        <li>Claude Sonnet 3.5</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="projeto">
+                <img src="assets/img/projeto 2.png" alt="Projeto 2">
+                <div class="projeto-info">
+                    <h3 id="project-2-title">Correção de Redação</h3>
+                    <p id="project-2-description">Receber imagem de redações via front-end que seriam jogadas para um bucket dentro do AWS S3, e utilizando o Sonnet 3.5 para fazer a OCR da redação e posteriormente a correção da mesma, conforme os critérios de avaliação jogados no prompt.</p>
+                    <ul class="tecnologias">
+                        <li>Python</li>
+                        <li>AWS</li>
+                        <li>Claude Sonnet 3.5</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="projeto">
+                <img src="assets/img/projeto 3.png" alt="Projeto 3">
+                <div class="projeto-info">
+                    <h3 id="project-3-title">Resumo de Documentos Jurídicos</h3>
+                    <p id="project-3-description">Receber o PDF'S dos documentos via front-end, posteriormente jogados dentro de um bucket no AWS S3, acionando uma lambda que usaria o modelo Sonnet 3.5 para fazer um chatbot sobre o documento e também um breve resumo do mesmo.</p>
+                    <ul class="tecnologias">
+                        <li>Python</li>
+                        <li>AWS</li>
+                        <li>Claude Sonnet 3.5</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contact" aria-label="Contact">
+            <h2 class="section-title" id="contact-title">Contato</h2>
+            <div class="contact__container bd-grid">
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/mpzevyrp" method="POST">
+                    <input type="text" name="name" placeholder="Seu Nome" class="contact__input" required>
+                    <input type="email" name="email" placeholder="Seu E-mail" class="contact__input" required>
+                    <textarea name="message" placeholder="Sua Mensagem" class="contact__input" required></textarea>
+                    <button type="submit" class="contact__button">Enviar</button>
+                </form>
+                <div id="success-message" style="display: none; color: #fff; margin-top: 1rem;"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Eduardo Schrotke. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button id="lang-toggle">EN | PT</button>
+    </div>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
