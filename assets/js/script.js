@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'home-title', 'home-subtitle', 'about-title', 'about-subtitle', 'about-profession',
         'about-text', 'about-text-2', 'skills-title', 'skills-subtitle', 'portfolio-title',
         'project-1-title', 'project-1-description', 'project-2-title', 'project-2-description',
-        'project-3-title', 'project-3-description', 'contact-title'
+        'project-3-title', 'project-3-description', 'contact-title',
+        'nomeContato','emailContato','mensagemContato','enviarMensagem'
     ];
     ids.forEach(id => {
         const element = document.getElementById(id);
@@ -89,13 +90,17 @@ document.addEventListener('DOMContentLoaded', () => {
             "skills-title": "Skills",
             "skills-subtitle": "Areas of Expertise",
             "portfolio-title": "Professional Experience",
-            "project-1-title": "Verbal Aggression Identification",
-            "project-1-description": "Receive videos via the frontend, upload them to an AWS S3 bucket, and use Amazon Transcribe for transcription. A Large Language Model (Claude Sonnet 3.5) analyzes the content and returns results via email.",
-            "project-2-title": "Writing Tutor",
-            "project-2-description": "Receive essay images via the frontend, upload them to an AWS S3 bucket, and use Sonnet 3.5 for OCR and subsequent correction based on evaluation criteria provided in the prompt.",
+            "project-1-title": "Verbal Aggression Detection (Team Project)",
+            "project-1-description": "As part of a dynamic team at our consulting firm, we spearheaded the development of a cutting-edge system that processes video uploads via a front-end interface, storing them in AWS S3 buckets. Leveraged Amazon Transcribe for audio transcription and integrated Claude Sonnet 3.5 (LLM) to detect verbal aggression with 81% accuracy, delivering real-time insights back to the front-end and via automated email notifications. Impact: Cut response time.",
+            "project-2-title": "Writing Tutor (Team Project)",
+            "project-2-description": "Working closely with a skilled team at our consulting firm, we engineered an innovative solution that processes essay images uploaded via front-end, storing them in AWS S3 buckets. Used OCR to extract text and harnessed Claude Sonnet 3.5 to correct and evaluate essays with 83% accuracy, based on custom criteria in prompts, providing detailed feedback. Impact: We reduce the correction time.",
             "project-3-title": "Legal Document Summarization",
-            "project-3-description": "Receive PDF documents via the frontend, upload them to an AWS S3 bucket, and trigger a Lambda function that uses Sonnet 3.5 to create a chatbot for the document and generate a brief summary.",
-            "contact-title": "Contact"
+            "project-3-description": "Assigned by the company, I designed and implemented a robust system that handles PDF uploads of legal documents via front-end, stored in AWS S3. Integrated AWS Lambda with Claude Sonnet 3.5 to power an interactive chatbot, delivering precise summaries and deep insights into complex legal texts, optimizing legal productivity.",
+            "contact-title": "Contact",
+            "nomeContato": "Name",
+            "emailContato":"Your E-mail",
+            "mensagemContato": "Your Message",
+            "enviarMensagem": "Send"
         },
         pt: {
             "home-title": "BEM VINDO, SOU",
@@ -108,13 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
             "skills-title": "Habilidades",
             "skills-subtitle": "Áreas de conhecimento",
             "portfolio-title": "Experiências Profissionais",
-            "project-1-title": "Identificação de Agressão Verbal",
-            "project-1-description": "Receber vídeos via front-end que seriam jogados para um bucket dentro do AWS S3, e utilizando o Amazon Transcribe, faz a transcrição do vídeo e é acionado uma LLM (no caso foi utilizado o modelo Claude Sonnet 3.5) onde fazia a análise e retornava no front-end e por e-mail quando se obtivesse uma resposta.",
-            "project-2-title": "Correção de Redação",
-            "project-2-description": "Receber imagem de redações via front-end que seriam jogadas para um bucket dentro do AWS S3, e utilizando o Sonnet 3.5 para fazer a OCR da redação e posteriormente a correção da mesma, conforme os critérios de avaliação jogados no prompt.",
-            "project-3-title": "Resumo de Documentos Jurídicos",
-            "project-3-description": "Receber o PDF'S dos documentos via front-end, posteriormente jogados dentro de um bucket no AWS S3, acionando uma lambda que usaria o modelo Sonnet 3.5 para fazer um chatbot sobre o documento e também um breve resumo do mesmo.",
-            "contact-title": "Contato"
+            "project-1-title": "Identificação de Agressão Verbal (Projeto em Equipe)",
+            "project-1-description": "Solução Revolucionária de IA para Detecção de Agressão Verbal (Projeto em Equipe na Consultoria). Como parte de uma equipe dinâmica na nossa consultoria, lideramos o desenvolvimento de um sistema de ponta que processa vídeos via interface front-end, armazenando-os em buckets AWS S3. Utilizamos o Amazon Transcribe para transcrição de áudio e integramos o Claude Sonnet 3.5 (LLM) para identificar agressões verbais com precisão de 81%. Retornamos insights em tempo real no front-end e por e-mail, transformando a moderação de conteúdo em larga escala.Impacto: Reduzimos o tempo de análise.",
+            "project-2-title": "Correção de Redação (Projeto em Equipe)",
+            "project-2-description": "Em parceria com um time de desenvolvedores na nossa consultoria, criamos uma solução inovadora que processa imagens de redações via front-end, armazenando-as em buckets AWS S3. Aplicamos OCR para extrair texto e usamos o Claude Sonnet 3.5 para corrigir e avaliar redações com precisão de 83%, com base em critérios personalizados em prompts, entregando feedback detalhado. Impacto: Reduzimos o tempo de correção.",
+            "project-3-title": "Resumo de Documentos Jurídicos (Tarefa Individual)",
+            "project-3-description": "Atribuído pela empresa, desenvolvi um sistema  que recebe PDFs de documentos jurídicos via front-end (Streamlit), armazenando-os em buckets AWS S3. Integrei à AWS Lambda com o Claude Sonnet 3.5 para criar um chatbot interativo, oferecendo resumos precisos e insights profundos sobre textos legais complexos, otimizando a produtividade jurídica.",
+            "contact-title": "Contato",
+            "nomeContato": "Seu Nome",
+            "emailContato":"Seu E-mail",
+            "mensagemContato": "Sua Mensagem",
+            "enviarMensagem": "Enviar"
         }
     };
 
