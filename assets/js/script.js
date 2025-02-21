@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggle = document.getElementById(toggleId),
               nav = document.getElementById(navId);
 
-        if(toggle && nav){
+        if (toggle && nav) {
             toggle.addEventListener('click', () => {
                 nav.classList.toggle('show');
             });
@@ -34,40 +34,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //===== SCROLL HOME =====
     sr.reveal('.home__title', {});
-    sr.reveal('.home__subtitle', {delay: 200});
-    sr.reveal('.home__img', {delay: 400});
-    sr.reveal('.home__data', {interval: 200});
+    sr.reveal('.home__subtitle', { delay: 200 });
+    sr.reveal('.home__img', { delay: 400 });
+    sr.reveal('.home__data', { interval: 200 });
 
     //===== SCROLL ABOUT =====
     sr.reveal('.about__img', {});
-    sr.reveal('.about__subtitle', {delay: 200});
-    sr.reveal('.about__text', {delay: 400});
-    sr.reveal('.about__data', {interval: 200});
-    sr.reveal('.about__cv-button', {delay: 600});
+    sr.reveal('.about__subtitle', { delay: 200 });
+    sr.reveal('.about__text', { delay: 400 });
+    sr.reveal('.about__data', { interval: 200 });
+    sr.reveal('.about__cv-button', { delay: 600 });
 
     //===== SCROLL SKILLS =====
     sr.reveal('.skills__subtitle', {});
-    sr.reveal('.skills__text', {delay: 200});
-    sr.reveal('.skills__data', {interval: 200});
+    sr.reveal('.skills__text', { delay: 200 });
+    sr.reveal('.skills__data', { interval: 200 });
 
     //===== SCROLL PORTFOLIO =====
-    sr.reveal('.portfolio__img', {interval: 200});
-    sr.reveal('.portfolio__subtitle', {delay: 200});
-    sr.reveal('.portfolio__text', {delay: 400});
+    sr.reveal('.portfolio__img', { interval: 200 });
+    sr.reveal('.portfolio__subtitle', { delay: 200 });
+    sr.reveal('.portfolio__text', { delay: 400 });
 
     //===== SCROLL CONTACT =====
-    sr.reveal('.contact-form', {delay: 400});
-    sr.reveal('.contact__button', {delay: 600});
+    sr.reveal('.contact-form', { delay: 400 });
+    sr.reveal('.contact__button', { delay: 600 });
 
     //===== LANGUAGE TOGGLE =====
     const langToggle = document.getElementById('lang-toggle');
+    const cvDownloadLink = document.getElementById('cv-download-link'); // Referência ao link do CV
     const elements = {};
     const ids = [
         'home-title', 'home-subtitle', 'about-title', 'about-subtitle', 'about-profession',
         'about-text', 'about-text-2', 'skills-title', 'skills-subtitle', 'portfolio-title',
         'project-1-title', 'project-1-description', 'project-2-title', 'project-2-description',
         'project-3-title', 'project-3-description', 'contact-title',
-        'nomeContato','emailContato','mensagemContato','enviarMensagem'
+        'nomeContato', 'emailContato', 'mensagemContato', 'enviarMensagem'
     ];
     ids.forEach(id => {
         const element = document.getElementById(id);
@@ -98,9 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
             "project-3-description": "Assigned by the company, I designed and implemented a robust system that handles PDF uploads of legal documents via front-end, stored in AWS S3. Integrated AWS Lambda with Claude Sonnet 3.5 to power an interactive chatbot, delivering precise summaries and deep insights into complex legal texts, optimizing legal productivity.",
             "contact-title": "Contact",
             "nomeContato": "Name",
-            "emailContato":"Your E-mail",
+            "emailContato": "Your E-mail",
             "mensagemContato": "Your Message",
-            "enviarMensagem": "Send"
+            "enviarMensagem": "Send",
+            "cv-text": "Download CV"
         },
         pt: {
             "home-title": "BEM VINDO, SOU",
@@ -118,12 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
             "project-2-title": "Correção de Redação (Projeto em Equipe)",
             "project-2-description": "Em parceria com um time de desenvolvedores na nossa consultoria, criamos uma solução inovadora que processa imagens de redações via front-end, armazenando-as em buckets AWS S3. Aplicamos OCR para extrair texto e usamos o Claude Sonnet 3.5 para corrigir e avaliar redações com precisão de 83%, com base em critérios personalizados em prompts, entregando feedback detalhado. Impacto: Reduzimos o tempo de correção.",
             "project-3-title": "Resumo de Documentos Jurídicos (Tarefa Individual)",
-            "project-3-description": "Atribuído pela empresa, desenvolvi um sistema  que recebe PDFs de documentos jurídicos via front-end (Streamlit), armazenando-os em buckets AWS S3. Integrei à AWS Lambda com o Claude Sonnet 3.5 para criar um chatbot interativo, oferecendo resumos precisos e insights profundos sobre textos legais complexos, otimizando a produtividade jurídica.",
+            "project-3-description": "Atribuído pela empresa, desenvolvi um sistema que recebe PDFs de documentos jurídicos via front-end (Streamlit), armazenando-os em buckets AWS S3. Integrei à AWS Lambda com o Claude Sonnet 3.5 para criar um chatbot interativo, oferecendo resumos precisos e insights profundos sobre textos legais complexos, otimizando a produtividade jurídica.",
             "contact-title": "Contato",
             "nomeContato": "Seu Nome",
-            "emailContato":"Seu E-mail",
+            "emailContato": "Seu E-mail",
             "mensagemContato": "Sua Mensagem",
-            "enviarMensagem": "Enviar"
+            "enviarMensagem": "Enviar",
+            "cv-text": "Baixar CV"
         }
     };
 
@@ -143,16 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const [key, element] of Object.entries(elements)) {
             if (element) {
                 if (translations[currentLang][key]) {
-                    if (key === 'download-cv-button') {
-                        const span = element.querySelector('span');
-                        if (span) {
-                            span.textContent = translations[currentLang]['cv-text'];
-                        }
-                    } else {
-                        element.textContent = translations[currentLang][key];
-                    }
+                    element.textContent = translations[currentLang][key];
                 }
             }
+        }
+        // Atualiza o link do CV com base no idioma
+        if (cvDownloadLink) {
+            cvDownloadLink.href = currentLang === 'pt' ? 'assets/pdf/CV_PT.pdf' : 'assets/pdf/CV_EN.pdf';
+            cvDownloadLink.download = currentLang === 'pt' ? 'CV_Eduardo_Schrotke_PT.pdf' : 'CV_Eduardo_Schrotke_EN.pdf';
         }
         document.documentElement.lang = currentLang;
     }
@@ -236,7 +237,6 @@ function typeWriterCharByChar(elementId, text, speed, addCursor = false) {
             index++;
             setTimeout(type, speed); // Delay entre cada caractere
         } else if (addCursor) {
-            // Adiciona a classe finished apenas se especificado
             element.classList.add('finished');
         }
     }
@@ -248,9 +248,6 @@ function typeWriterCharByChar(elementId, text, speed, addCursor = false) {
 
 // Chamar a função quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
-    // (Seu código existente permanece o mesmo até aqui)
-
-    // Adicionando o typewriting caractere por caractere para os títulos da Home
     typeWriterCharByChar('home-title', 'BEM VINDO, SOU', 80, false); // Sem cursor no título
     setTimeout(() => {
         typeWriterCharByChar('home-subtitle', 'Desenvolvedor IA | Est. Eng. Software', 80, true); // Com cursor no subtítulo

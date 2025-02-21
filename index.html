@@ -51,7 +51,7 @@
                         <span class="about__profession" id="about-profession">Desenvolvedor IA | Estudante de Engenharia de Software</span>
                         <p class="about__text" id="about-text">Atuo como desenvolvedor de IA Trainee na CompassUOL, onde aplico meus conhecimentos em inteligência artificial para projetos inovadores.</p>
                         <p id="about-text-2">Estou no penúltimo ano de Engenharia de Software, com conclusão prevista para julho de 2026.</p>
-                        <a href="assets/pdf/CV.pdf" download class="about__cv-button">
+                        <a id="cv-download-link" href="assets/pdf/CV_PT.pdf" download class="about__cv-button">
                             <button id="download-cv-button" class="cv-button"><i class='bx bx-download'></i> <span id="cv-text">Baixar CV</span></button>
                         </a>
                         <div class="about__socials">
@@ -123,7 +123,7 @@
                 <img src="assets/img/projeto 3.png" alt="Projeto 3">
                 <div class="projeto-info">
                     <h3 id="project-3-title">Resumo de Documentos Jurídicos (Tarefa Individual)</h3>
-                    <p id="project-3-description">Atribuído pela empresa, desenvolvi um sistema  que recebe PDFs de documentos jurídicos via front-end (Streamlit), armazenando-os em buckets AWS S3. Integrei à AWS Lambda com o Claude Sonnet 3.5 para criar um chatbot interativo, oferecendo resumos precisos e insights profundos sobre textos legais complexos, otimizando a produtividade jurídica.</p>
+                    <p id="project-3-description">Atribuído pela empresa, desenvolvi um sistema que recebe PDFs de documentos jurídicos via front-end (Streamlit), armazenando-os em buckets AWS S3. Integrei à AWS Lambda com o Claude Sonnet 3.5 para criar um chatbot interativo, oferecendo resumos precisos e insights profundos sobre textos legais complexos, otimizando a produtividade jurídica.</p>
                     <ul class="tecnologias">
                         <li>Python</li>
                         <li>AWS</li>
@@ -140,8 +140,8 @@
                 <form id="contact-form" class="contact-form" action="https://formspree.io/f/mpzevyrp" method="POST">
                     <input type="text" id="nomeContato" name="name" placeholder="Seu Nome" class="contact__input" required>
                     <input type="email" id="emailContato" name="email" placeholder="Seu E-mail" class="contact__input" required>
-                    <textarea name="message" id ="mensagemContato" placeholder="Sua Mensagem" class="contact__input" required></textarea>
-                    <button type="submit" id ="enviarMensagem" class="contact__button">Enviar</button>
+                    <textarea name="message" id="mensagemContato" placeholder="Sua Mensagem" class="contact__input" required></textarea>
+                    <button type="submit" id="enviarMensagem" class="contact__button">Enviar</button>
                 </form>
                 <div id="success-message" style="display: none; color: #fff; margin-top: 1rem;"></div>
             </div>
