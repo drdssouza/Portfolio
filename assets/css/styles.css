@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap');
 /* ================================
    Variáveis Globais
    ================================ */
@@ -9,7 +11,7 @@
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     --border-radius: 10px;
     --transition-speed: 0.3s;
-    --font-family: 'Arial', sans-serif;
+    --font-family: 'Roboto', sans-serif;
 }
 
 /* ================================
@@ -205,7 +207,7 @@ img {
 }
 .home__title, .home__subtitle {
     white-space: pre-wrap; /* Mantém quebras de linha e espaços */
-    font-family: 'Courier New', Courier, monospace; /* Estilo de máquina de escrever */
+    font-family: 'Source Code Pro', monospace; /* Estilo de máquina de escrever */
     overflow: hidden; /* Evita que o texto exceda o contêiner */
     
     animation: blink-caret 0.75s step-end infinite;
@@ -576,6 +578,11 @@ footer {
         max-width: 150px;
     }
 
+    .circle-image{
+        width: 150px;
+        height: 150px;
+    }
+
     .about__info {
         text-align: center;
     }
@@ -638,6 +645,11 @@ footer {
 
     .about__img {
         max-width: 120px;
+    }
+
+    .circle-image{
+        width: 120px;
+        height: 120px;
     }
 
     .about__subtitle {

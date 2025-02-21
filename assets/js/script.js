@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //===== LANGUAGE TOGGLE =====
     const langToggle = document.getElementById('lang-toggle');
-    const cvDownloadLink = document.getElementById('cv-download-link'); // Referência ao link do CV
+    const cvDownloadLink = document.getElementById('cv-download-link');
     const elements = {};
     const ids = [
         'home-title', 'home-subtitle', 'about-title', 'about-subtitle', 'about-profession',
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "skills-subtitle": "Áreas de conhecimento",
             "portfolio-title": "Experiências Profissionais",
             "project-1-title": "Identificação de Agressão Verbal (Projeto em Equipe)",
-            "project-1-description": "Solução Revolucionária de IA para Detecção de Agressão Verbal (Projeto em Equipe na Consultoria). Como parte de uma equipe dinâmica na nossa consultoria, lideramos o desenvolvimento de um sistema de ponta que processa vídeos via interface front-end, armazenando-os em buckets AWS S3. Utilizamos o Amazon Transcribe para transcrição de áudio e integramos o Claude Sonnet 3.5 (LLM) para identificar agressões verbais com precisão de 81%. Retornamos insights em tempo real no front-end e por e-mail, transformando a moderação de conteúdo em larga escala.Impacto: Reduzimos o tempo de análise.",
+            "project-1-description": "Solução Revolucionária de IA para Detecção de Agressão Verbal (Projeto em Equipe na Consultoria). Como parte de uma equipe dinâmica na nossa consultoria, lideramos o desenvolvimento de um sistema de ponta que processa vídeos via interface front-end, armazenando-os em buckets AWS S3. Utilizamos o Amazon Transcribe para transcrição de áudio e integramos o Claude Sonnet 3.5 (LLM) para identificar agressões verbais com precisão de 81%. Retornamos insights em tempo real no front-end e por e-mail, transformando a moderação de conteúdo em larga escala. Impacto: Reduzimos o tempo de análise.",
             "project-2-title": "Correção de Redação (Projeto em Equipe)",
             "project-2-description": "Em parceria com um time de desenvolvedores na nossa consultoria, criamos uma solução inovadora que processa imagens de redações via front-end, armazenando-as em buckets AWS S3. Aplicamos OCR para extrair texto e usamos o Claude Sonnet 3.5 para corrigir e avaliar redações com precisão de 83%, com base em critérios personalizados em prompts, entregando feedback detalhado. Impacto: Reduzimos o tempo de correção.",
             "project-3-title": "Resumo de Documentos Jurídicos (Tarefa Individual)",
@@ -130,13 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    let currentLang = 'pt';
+    let currentLang = localStorage.getItem('lang') || 'pt'; // Persiste o idioma (opcional)
 
     if (langToggle) {
         langToggle.addEventListener('click', () => {
             currentLang = currentLang === 'pt' ? 'en' : 'pt';
             langToggle.textContent = currentLang === 'pt' ? 'EN | PT' : 'PT | EN';
+            localStorage.setItem('lang', currentLang); // Salva o idioma (opcional)
             updateTranslations();
+            // Reexecuta o efeito de máquina de escrever ao mudar idioma
+            typeWriterCharByChar('home-title', translations[currentLang]['home-title'], 80, false);
+            setTimeout(() => {
+                typeWriterCharByChar('home-subtitle', translations[currentLang]['home-subtitle'], 80, true);
+            }, translations[currentLang]['home-title'].length * 80 + 1000); // Delay dinâmico
         });
     } else {
         console.error('Elemento com ID "lang-toggle" não encontrado no DOM.');
@@ -144,8 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTranslations() {
         for (const [key, element] of Object.entries(elements)) {
-            if (element) {
-                if (translations[currentLang][key]) {
+            if (element && translations[currentLang][key]) {
+                if (key !== 'home-title' && key !== 'home-subtitle') { // Não sobrescreve título/subtítulo aqui
                     element.textContent = translations[currentLang][key];
                 }
             }
@@ -157,6 +163,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.documentElement.lang = currentLang;
     }
+
+    // Executa traduções iniciais sem afetar home-title e home-subtitle
+    updateTranslations();
+
+    // Inicia o efeito de máquina de escrever ao carregar a página
+    typeWriterCharByChar('home-title', translations[currentLang]['home-title'], 80, false);
+    setTimeout(() => {
+        typeWriterCharByChar('home-subtitle', translations[currentLang]['home-subtitle'], 80, true);
+    }, translations[currentLang]['home-title'].length * 80 + 1000); // Delay dinâmico baseado no comprimento do título
 
     //===== FORM SUBMISSION AND VALIDATION =====
     const form = document.querySelector('.contact-form');
@@ -226,30 +241,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Função para animação caractere por caractere com controle melhor
+// Função para animação caractere por caractere
 function typeWriterCharByChar(elementId, text, speed, addCursor = false) {
     const element = document.getElementById(elementId);
+    if (!element) {
+        console.error(`Elemento com ID '${elementId}' não encontrado.`);
+        return;
+    }
     let index = 0;
-
     function type() {
         if (index < text.length) {
             element.textContent += text.charAt(index);
             index++;
-            setTimeout(type, speed); // Delay entre cada caractere
+            setTimeout(type, speed);
         } else if (addCursor) {
             element.classList.add('finished');
         }
     }
-
-    element.textContent = ''; // Limpa o texto inicial
-    element.classList.remove('finished'); // Garante que a classe não esteja ativa antes de começar
+    element.textContent = ''; // Garante que começa vazio
+    element.classList.remove('finished');
     type();
 }
-
-// Chamar a função quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
-    typeWriterCharByChar('home-title', 'BEM VINDO, SOU', 80, false); // Sem cursor no título
-    setTimeout(() => {
-        typeWriterCharByChar('home-subtitle', 'Desenvolvedor IA | Est. Eng. Software', 80, true); // Com cursor no subtítulo
-    }, 1000); // Delay de 1 segundo para o segundo título começar
-});
