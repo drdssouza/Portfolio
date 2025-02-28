@@ -34,16 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //===== SCROLL HOME =====
   sr.reveal(".home__title", {});
-  sr.reveal(".home__subtitle", { delay: 200 });
-  sr.reveal(".home__img", { delay: 400 });
-  sr.reveal(".home__data", { interval: 200 });
+  sr.reveal(".home__subtitle", { delay: 100 });
+  sr.reveal(".home__img", { delay: 200 });
+  sr.reveal(".home__data", { interval: 100 });
 
   //===== SCROLL CONTACT =====
   sr.reveal(".contact-form", { delay: 400 });
   sr.reveal(".contact__button", { delay: 600 });
 
   //===== LANGUAGE TOGGLE =====
-  const langToggle = document.getElementById("lang-toggle");
+  const switchInput = document.getElementById("switch");
+  const switchLabel = document.getElementById("switch-label");
   const cvDownloadLink = document.getElementById("cv-download-link");
   const elements = {};
   const ids = [
@@ -69,6 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
     "mensagemContato",
     "enviarMensagem",
     "cv-text",
+    "nav-home",
+    "nav-about",
+    "nav-skills",
+    "nav-portfolio",
+    "nav-contact",
   ];
   ids.forEach((id) => {
     const element = document.getElementById(id);
@@ -108,6 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
       mensagemContato: "Your Message",
       enviarMensagem: "Send",
       "cv-text": "Download CV",
+      "nav-home": "Home",
+      "nav-about": "About",
+      "nav-skills": "Skills",
+      "nav-portfolio": "Projects",
+      "nav-contact": "Contact",
     },
     pt: {
       "home-title": "BEM VINDO, SOU",
@@ -138,13 +149,21 @@ document.addEventListener("DOMContentLoaded", () => {
       mensagemContato: "Sua Mensagem",
       enviarMensagem: "Enviar",
       "cv-text": "Baixar CV",
+      "nav-home": "Home",
+      "nav-about": "Sobre",
+      "nav-skills": "Habilidades",
+      "nav-portfolio": "Projetos",
+      "nav-contact": "Contato",
     },
   };
 
-  let currentLang = localStorage.getItem("lang") || "pt"; 
-  updateLanguageButtonStyle(); 
-  updateTranslations(); 
-  let isAnimating = false; 
+  let currentLang = localStorage.getItem("lang") || "pt";
+  let isAnimating = false;
+
+  // Sincroniza o estado inicial do checkbox com o idioma atual
+  if (switchInput) {
+    switchInput.checked = currentLang === "en";
+  }
 
   // Função debounce para limitar cliques rápidos
   const debounce = (func, wait) => {
@@ -155,16 +174,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   };
 
-  if (langToggle) {
-    langToggle.addEventListener(
-      "click",
+  if (switchInput) {
+    switchInput.addEventListener(
+      "change",
       debounce(() => {
-        if (isAnimating) return; 
-        currentLang = currentLang === "pt" ? "en" : "pt";
-        langToggle.textContent = currentLang === "pt" ? "EN | PT" : "PT | EN";
-        localStorage.setItem("lang", currentLang); 
+        if (isAnimating) return;
+        currentLang = switchInput.checked ? "en" : "pt";
+        localStorage.setItem("lang", currentLang);
         updateTranslations();
-        // Inicia a animação, marcando que está em progresso
+
+        // Inicia a animação
         isAnimating = true;
         typeWriterCharByChar(
           "home-title",
@@ -179,55 +198,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 80,
                 true,
                 () => {
-                  isAnimating = false; 
+                  isAnimating = false;
                 }
               );
-            }, translations[currentLang]["home-title"].length * 80 + 1000);
+            }, translations[currentLang]["home-title"].length * 80 + 200);
           }
         );
-
-        // Atualiza o estilo do botão de idioma
-        updateLanguageButtonStyle();
       }, 500)
-    ); // 500ms de debounce para evitar cliques rápidos
+    );
   } else {
-    console.error('Elemento com ID "lang-toggle" não encontrado no DOM.');
-  }
-
-  // Função para atualizar o estilo do botão de idioma
-  function updateLanguageButtonStyle() {
-    const langParts = document.querySelectorAll(".lang-part");
-    // Remove todas as classes .active e .inactive de todos os spans primeiro
-    langParts.forEach((part) => {
-      part.classList.remove("active");
-      part.classList.remove("inactive");
-    });
-    // Aplica .active ao idioma atual e .inactive ao não selecionado
-    langParts.forEach((part) => {
-      if (part.dataset.lang === currentLang) {
-        part.classList.add("active");
-      } else {
-        part.classList.add("inactive");
-      }
-    });
+    console.error('Elemento com ID "switch" não encontrado no DOM.');
   }
 
   function updateTranslations() {
     for (const [key, element] of Object.entries(elements)) {
       if (element && translations[currentLang][key]) {
         if (key !== "home-title" && key !== "home-subtitle") {
-          // Não sobrescreve título/subtítulo aqui
           if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
-            // Atualiza o atributo placeholder para inputs e textareas
             element.placeholder = translations[currentLang][key];
           } else {
-            // Para outros elementos, atualiza o textContent
             element.textContent = translations[currentLang][key];
           }
         }
       }
     }
-    // Atualiza o link do CV com base no idioma
     if (cvDownloadLink) {
       cvDownloadLink.href =
         currentLang === "pt" ? "assets/pdf/CV_PT.pdf" : "assets/pdf/CV_EN.pdf";
@@ -238,12 +232,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     document.documentElement.lang = currentLang;
 
-    // Força o recalculo do layout para evitar problemas de posicionamento
     const form = document.querySelector(".contact-form");
     if (form) {
-      void form.offsetHeight; // Força o navegador a recalcular o layout
-
-      // Reseta a validação visual do formulário ao mudar de idioma
+      void form.offsetHeight;
       const inputs = form.querySelectorAll(".contact__input");
       inputs.forEach((input) => {
         input.style.borderColor = "#e0e0e0";
@@ -251,7 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   updateTranslations();
-  updateLanguageButtonStyle();
 
   // Inicia o efeito de máquina de escrever ao carregar a página
   isAnimating = true;
@@ -268,10 +258,10 @@ document.addEventListener("DOMContentLoaded", () => {
           80,
           true,
           () => {
-            isAnimating = false; // Marca como concluído
+            isAnimating = false;
           }
         );
-      }, translations[currentLang]["home-title"].length * 80 + 1000);
+      }, translations[currentLang]["home-title"].length * 80 + 200);
     }
   );
 
@@ -370,7 +360,36 @@ function typeWriterCharByChar(
       if (callback) callback();
     }
   }
-  element.textContent = ""; // Garante que começa vazio
+  element.textContent = "";
   element.classList.remove("finished");
   type();
 }
+
+// Função pra dev curioso
+function devMessage() {
+  // Detecta se o DevTools está aberto
+  let devToolsOpened = false;
+
+  setInterval(() => {
+    const widthDiff = window.outerWidth - window.innerWidth;
+    const heightDiff = window.outerHeight - window.innerHeight;
+
+    if ((widthDiff > 100 || heightDiff > 100) && !devToolsOpened) {
+      devToolsOpened = true;
+      console.clear();
+      console.log(
+        "%cOpa, fala DevCurioso! 👀",
+        "color: red; font-size: 20px; font-weight: bold;"
+      );
+      console.log(
+        "%cCaso tenha curiosidades ou pontos de melhoria à passar, entre em contato comigo e vamos conversar 📧 eduardoschrotke@gmail.com",
+        "color: #ff6600; font-size: 18px; font-weight: bold;"
+      );
+    } else if (widthDiff <= 100 && heightDiff <= 100) {
+      devToolsOpened = false;
+    }
+  }, 1000);
+}
+
+// Chama a função ao carregar a página
+devMessage();

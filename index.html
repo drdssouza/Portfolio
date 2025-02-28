@@ -16,11 +16,11 @@
         <nav class="nav bd-grid">
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
-                    <li class="nav__item"><a href="#about" class="nav__link">Sobre</a></li>
-                    <li class="nav__item"><a href="#skills" class="nav__link">Habilidades</a></li>
-                    <li class="nav__item"><a href="#portfolio" class="nav__link">Projetos</a></li>
-                    <li class="nav__item"><a href="#contact" class="nav__link">Contato</a></li>
+                    <li class="nav__item"><a href="#home" class="nav__link" id="nav-home">Home</a></li>
+                    <li class="nav__item"><a href="#about" class="nav__link" id="nav-about">Sobre</a></li>
+                    <li class="nav__item"><a href="#skills" class="nav__link" id="nav-skills">Habilidades</a></li>
+                    <li class="nav__item"><a href="#portfolio" class="nav__link" id="nav-portfolio">Projetos</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link" id="nav-contact">Contato</a></li>
                 </ul>
             </div>
             <div class="nav__toggle" id="nav-toggle">
@@ -179,13 +179,12 @@
         <p>© 2025 Eduardo Schrotke. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Language Switcher -->
     <div class="language-switcher">
-        <button id="lang-toggle">
-            <span class="lang-part" data-lang="pt">PT</span> | <span class="lang-part" data-lang="en">EN</span>
-        </button>
+        <input type="checkbox" id="switch" />
+        <label for="switch" id="switch-label">Toggle</label>
     </div>
 
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
